@@ -1,8 +1,9 @@
 #include <iostream>
 
-void RechercheMoins(){
+
+size_t plus_grand_bloc_allouable(){
+    size_t moyenne, plus, moins;
     size_t taille = 1;
-    size_t plus, moins;
     bool quitter = false;
     while(!quitter){
         try
@@ -17,29 +18,22 @@ void RechercheMoins(){
             quitter = true;
         }
     }
-}
 
-
-size_t plus_grand_bloc_allouable(){
-    size_t moyenne, plus, moins;
-    while(plus+1!=moins){
+    while(plus+1!=moins){               
         try
         {
-            moyenne = (moins+plus)/2;
+            moyenne = (moins+plus)/2;           //Prendre la valeur entre le plus et le moins
             char* tab = new char[moyenne];
             delete[] tab;
-            plus = moyenne;
+            plus = moyenne;                     //tout a fonctionné alors la valeur du milieu est supérieur.
         }
-        catch(const std::bad_alloc& e)
+        catch(const std::bad_alloc& e)          //Si ça catch une erreur
         {
-            moins = moyenne;
+            moins = moyenne;                    //Alors la valeur du milieu est trop grand, on affecte cette valeur au moins.
         }
     }
-    std::cout<<moyenne;
+    std::cout<<moyenne<<'\n';
+    return EXIT_SUCCESS;
+
 }
 
-
-int main() {
-    RechercheMoins();
-    plus_grand_bloc_allouable();
-}
